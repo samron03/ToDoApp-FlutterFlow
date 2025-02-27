@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "799417824957",
+    "project_id": "to-do-oejcsc",
+    "storage_bucket": "to-do-oejcsc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799417824957:android:d60b74236db03f98efa9d4",
+        "android_client_info": {
+          "package_name": "com.mycompany.todo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8cjgmWyLHRMsfbmskWii40MsLUlQQNWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
