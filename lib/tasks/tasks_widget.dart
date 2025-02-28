@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/components/add_task_widget.dart';
 import '/components/task_widget.dart';
@@ -6,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'tasks_model.dart';
 export 'tasks_model.dart';
 
@@ -28,6 +30,18 @@ class _TasksWidgetState extends State<TasksWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TasksModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.apiResultm0d = await ZenQuoteAPICall.call();
+
+      if ((_model.apiResultm0d?.succeeded ?? true)) {
+        _model.randomQuote = ZenQuoteAPICall.quote(
+          (_model.apiResultm0d?.jsonBody ?? ''),
+        );
+        safeSetState(() {});
+      }
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -106,6 +120,21 @@ class _TasksWidgetState extends State<TasksWidget> {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Flexible(
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                    child: Text(
+                      _model.randomQuote!,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            fontSize: 18.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                   child: Text(
